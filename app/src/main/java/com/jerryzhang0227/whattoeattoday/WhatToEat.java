@@ -13,12 +13,14 @@ public class WhatToEat {
     public static String Boom() {
         Random random = new Random();
         int result = random.nextInt(100);
-        if (0 < result && result <= 33) {
+        if (0 < result && result <= 31) {
             finalResult = "A饭堂";
-        }else if (33 < result && result <= 66) {
+        }else if (31 < result && result <= 62) {
             finalResult = "B饭堂";
-        }else if (66 < result && result <= 99) {
+        }else if (62 < result && result <= 93) {
             finalResult = "C饭堂";
+        }else if (93 < result && result <= 99) {
+            finalResult = "外卖吧";
         }else {
             finalResult = "麦当劳!!!";
         }if (MainActivity.count == 1) {

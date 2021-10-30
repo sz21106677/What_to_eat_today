@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mButton2.setVisibility(View.GONE);
         count = 0;
         WhatToEat.Pignese();
+        mTextView.setText(ReadFile.ReadRecord());
     }
 
     private void eat() {
