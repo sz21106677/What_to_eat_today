@@ -7,42 +7,47 @@ import java.io.FileWriter;
 import java.util.Random;
 
 public class WhatToEat {
-    static String finalResult;
     static String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/database/";
+    static Random random = new Random();
 
-    public static String Boom() {
-        Random random = new Random();
-        int result = random.nextInt(100);
-        if (0 < result && result <= 31) {
-            finalResult = "A饭堂";
-        }else if (31 < result && result <= 62) {
-            finalResult = "B饭堂";
-        }else if (62 < result && result <= 93) {
-            finalResult = "C饭堂";
-        }else if (93 < result && result <= 99) {
-            finalResult = "外卖吧";
-        }else {
-            finalResult = "麦当劳!!!";
-        }if (MainActivity.count == 1) {
-            return "那今天必须吃"+finalResult;
+    static String codeResolve(int eatCodeNum) {
+        String eatWhat = null;
+        switch (eatCodeNum) {
+            case 901:
+                eatWhat = "今天吃A饭堂";
+                break;
+            case 902:
+                eatWhat = "今天吃B饭堂";
+                break;
+            case 903:
+                eatWhat = "今天吃C饭堂";
+                break;
+            case 904:
+                eatWhat = "外卖";
+                break;
+            case 905:
+                eatWhat = "今天吃麦当劳!!!";
+                break;
         }
-        return "今天吃"+finalResult;
+        return eatWhat;
+    }
+
+    public static String takeOut() {
+        String[] takeOut = {"90Go","快猪"};
+        String result = null;
+        int a = random.nextInt(2);
+        result = takeOut[a];
+        return "点"+result;
     }
 
     public static String Pignese() {
-        Random random = new Random();
-        int result = random.nextInt(100);
-        if (0 < result && result <= 33) {
-            finalResult = "神经病";
-        }else if (33 < result && result <= 66) {
-            finalResult = "爬";
-        }else if (66 < result && result <= 99) {
-            finalResult = "铸币";
-        }else {
-            finalResult = "我爱你";
-        }
-        Save(finalResult);
-        return finalResult;
+        String pigSay;
+        String[] pigSays = {"神经病","犯病了是吧","爬","smys","?","铸币","sb是吧","人呢","666","🐮"};
+        int result = random.nextInt(10);
+        pigSay = pigSays[result];
+        Save(pigSay);
+        MainActivity.count = 0;
+        return pigSay;
     }
 
 
