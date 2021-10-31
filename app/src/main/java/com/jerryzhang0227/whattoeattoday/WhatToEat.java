@@ -10,23 +10,43 @@ public class WhatToEat {
     static String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/database/";
     static Random random = new Random();
 
-    static String codeResolve(int eatCodeNum) {
+    static String codeResolve(int a) {
         String eatWhat = null;
-        switch (eatCodeNum) {
+        switch (a) {
             case 901:
-                eatWhat = "今天吃A饭堂";
+                if (MainActivity.count == 1) {
+                    eatWhat = "那今天必须吃A饭堂";
+                } else {
+                    eatWhat = "今天吃A饭堂";
+                }
                 break;
             case 902:
-                eatWhat = "今天吃B饭堂";
+                if (MainActivity.count == 1) {
+                    eatWhat = "那今天必须吃B饭堂";
+                } else {
+                    eatWhat = "今天吃B饭堂";
+                }
                 break;
             case 903:
-                eatWhat = "今天吃C饭堂";
+                if (MainActivity.count == 1) {
+                    eatWhat = "那今天必须吃C饭堂";
+                } else {
+                    eatWhat = "今天吃C饭堂";
+                }
                 break;
             case 904:
-                eatWhat = "外卖";
+                if (MainActivity.count == 1) {
+                    eatWhat = "那今天必须点外卖";
+                } else {
+                    eatWhat = "今天点外卖";
+                }
                 break;
             case 905:
-                eatWhat = "今天吃麦当劳!!!";
+                if (MainActivity.count == 1) {
+                    eatWhat = "那今天必须吃麦当劳!!!";
+                } else {
+                    eatWhat = "今天吃麦当劳!!!";
+                }
                 break;
         }
         return eatWhat;

@@ -101,8 +101,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Str = eatWhat();
         Log.i("Str传递值:", Str);
         if (count < 2) {
-            if (Str == "外卖") {
-                mTextView.setText("今天点外卖");;
+            if (Str == "今天点外卖" || Str == "那今天必须点外卖") {
+                mTextView.setText(Str);;
                 mButton.setText("点什么");
                 mButton2.setVisibility(View.VISIBLE);
                 mButton2.setText("不行");
