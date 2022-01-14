@@ -1,4 +1,4 @@
-package com.jerryzhang0227.whattoeattoday;
+package com.jerryzhang0227.whattoeattoday.views;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -14,6 +14,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+
+import com.jerryzhang0227.whattoeattoday.R;
 
 
 /**
@@ -68,9 +70,6 @@ public class RoundView extends androidx.appcompat.widget.AppCompatImageView {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        /**
-         * 当模式为圆形模式的时候，我们强制让宽高一致
-         */
         if (currMode == MODE_CIRCLE) {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
             int result = Math.min(getMeasuredHeight(), getMeasuredWidth());

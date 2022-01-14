@@ -4,31 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activities.WhatToEatActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@color/light_blue_600"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="吃什么"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/mst_btn"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"
-        android:text="朱萌昊今天吃什么"
+        android:text="今天吃什么"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:rippleColor="@color/teal_200" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="不行"
-        app:layout_constraintEnd_toEndOf="@+id/button"
-        app:layout_constraintStart_toStartOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
-
-    <com.jerryzhang0227.whattoeattoday.RoundView
+    <com.jerryzhang0227.whattoeattoday.views.RoundView
         android:id="@+id/n1mble"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -40,7 +53,7 @@
         app:type="circle" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/mst_txtv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
