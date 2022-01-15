@@ -1,4 +1,4 @@
-package com.jerryzhang0227.whattoeattoday.adptader;
+package com.jerryzhang0227.whattoeattoday.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.jerryzhang0227.whattoeattoday.R;
 import com.jerryzhang0227.whattoeattoday.model.Food;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class FoodAdapter extends BaseAdapter {

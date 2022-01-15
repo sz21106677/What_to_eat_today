@@ -2,7 +2,6 @@ package com.jerryzhang0227.whattoeattoday.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -16,11 +15,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.jerryzhang0227.whattoeattoday.R;
-import com.jerryzhang0227.whattoeattoday.adptader.FoodAdapter;
+import com.jerryzhang0227.whattoeattoday.adapter.FoodAdapter;
 import com.jerryzhang0227.whattoeattoday.model.Food;
 import com.jerryzhang0227.whattoeattoday.utils.DatabaseHelper;
 
@@ -29,9 +27,8 @@ import java.util.List;
 
 public class DAOActivity extends AppCompatActivity {
 
-    private Spinner mSpinner;
     private List<Food> mData = null;
-    private Context mContext;
+    private Context mContext = DAOActivity.this;
     private FoodAdapter mAdapter = null;
     private ListView list_food;
     private ImageButton mIbtnAddsql;
@@ -45,7 +42,7 @@ public class DAOActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dao);
         iniData();
         initView();
-        Toast.makeText(DAOActivity.this,"长按可删除列表项",Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext,"长按可删除列表项",Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -55,10 +52,9 @@ public class DAOActivity extends AppCompatActivity {
     }
 
     private void iniData() {
-        mContext = DAOActivity.this;
         list_food = (ListView) findViewById(R.id.lsv);
         mData = new LinkedList<Food>();
-        DatabaseHelper dbsqLiteOpenHelper = new DatabaseHelper(DAOActivity.this, "food.db", null, 1);
+        DatabaseHelper dbsqLiteOpenHelper = new DatabaseHelper(mContext, "food.db", null, 1);
         SQLiteDatabase db = dbsqLiteOpenHelper.getWritableDatabase();
         Cursor cursor = db.rawQuery("select name,weight from foodlist", null);
         while (cursor.moveToNext()) {
@@ -75,7 +71,7 @@ public class DAOActivity extends AppCompatActivity {
                 db.delete("foodlist","name=?",new String[]{defood});
                 mData.remove(i);
                 mAdapter.notifyDataSetChanged();
-                Toast.makeText(DAOActivity.this, "删除了"+defood, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "删除了"+defood, Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
@@ -87,7 +83,7 @@ public class DAOActivity extends AppCompatActivity {
         mIbtnAddsql.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(DAOActivity.this, DAOADDActivity.class));
+                startActivity(new Intent(mContext, DAOADDActivity.class));
             }
         });
         mButton = (Button) findViewById(R.id.button);
