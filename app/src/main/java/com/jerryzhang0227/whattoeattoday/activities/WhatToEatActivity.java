@@ -87,7 +87,7 @@ public class WhatToEatActivity extends AppCompatActivity implements View.OnClick
 
     private void reset() {
         mTextView.setText(Pignese());
-        mButton.setText("朱萌昊今天吃什么");
+        mButton.setText("今天吃什么");
         count = 0;
         isClicked = false;
         finished = false;
