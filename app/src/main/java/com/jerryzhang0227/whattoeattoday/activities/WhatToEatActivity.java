@@ -27,7 +27,7 @@ public class WhatToEatActivity extends AppCompatActivity implements View.OnClick
 
     private Button mButton;
     private TextView mTextView;
-    static boolean isClicked;
+    private static boolean isClicked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
