@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Data/AndroidStudioProjects/Whattoeattoday/app/src/main/res/drawable/avtar_background.xml" value="0.20052083333333334" />
+        <entry key="..\:/Data/AndroidStudioProjects/Whattoeattoday/app/src/main/res/drawable/text_background.xml" value="0.20052083333333334" />
+        <entry key="..\:/Data/AndroidStudioProjects/Whattoeattoday/app/src/main/res/drawable/triangle_left.xml" value="0.20052083333333334" />
         <entry key="..\:/Data/AndroidStudioProjects/Whattoeattoday/app/src/main/res/layout/activity_dao.xml" value="0.37341772151898733" />
         <entry key="..\:/Data/AndroidStudioProjects/Whattoeattoday/app/src/main/res/layout/activity_daoaddactivity.xml" value="0.20625" />
         <entry key="..\:/Data/AndroidStudioProjects/Whattoeattoday/app/src/main/res/layout/activity_main.xml" value="0.33" />

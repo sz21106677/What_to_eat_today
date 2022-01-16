@@ -12,10 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.jerryzhang0227.whattoeattoday.R;
 
+import java.net.HttpURLConnection;
+
 public class StartActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button mWhattoeatBtn;
-    private Button mMasturBtn;
     private Button mMathBtn;
 
     @Override
