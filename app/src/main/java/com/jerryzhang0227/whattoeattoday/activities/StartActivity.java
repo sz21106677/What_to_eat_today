@@ -37,6 +37,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         int id = view.getId();
+        //根据按钮实现跳转页面
         switch (id) {
             case R.id.whattoeat_btn:
                 startActivity(new Intent(StartActivity.this, WhatToEatActivity.class));

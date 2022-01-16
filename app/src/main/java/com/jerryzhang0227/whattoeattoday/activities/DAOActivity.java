@@ -53,23 +53,30 @@ public class DAOActivity extends AppCompatActivity {
 
     private void iniData() {
         list_food = (ListView) findViewById(R.id.lsv);
+        //新建一个链表
         mData = new LinkedList<Food>();
+        //打开数据库并遍历查询信息
         DatabaseHelper dbsqLiteOpenHelper = new DatabaseHelper(mContext, "food.db", null, 1);
         SQLiteDatabase db = dbsqLiteOpenHelper.getWritableDatabase();
         Cursor cursor = db.rawQuery("select name,weight from foodlist", null);
+        //根据遍历结果将数据插入链表
         while (cursor.moveToNext()) {
             @SuppressLint("Range") String foodname = cursor.getString(cursor.getColumnIndex("name"));
             @SuppressLint("Range") int weight = cursor.getInt(cursor.getColumnIndex("weight"));
             mData.add(new Food(foodname, weight));
         }
+        //新建适配器
         mAdapter = new FoodAdapter((LinkedList<Food>) mData, mContext);
         list_food.setAdapter(mAdapter);
+        //长按删除列表项
         list_food.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //根据i删除列表所在位置，并在数据库中一并删除记录
                 String defood = mData.get(i).getFoodName();
                 db.delete("foodlist","name=?",new String[]{defood});
                 mData.remove(i);
+                //及时刷新列表
                 mAdapter.notifyDataSetChanged();
                 Toast.makeText(mContext, "删除了"+defood, Toast.LENGTH_SHORT).show();
                 return false;
@@ -80,6 +87,7 @@ public class DAOActivity extends AppCompatActivity {
 
     private void initView() {
         mIbtnAddsql = (ImageButton) findViewById(R.id.ibtn_addsql);
+        //跳转至添加数据页面
         mIbtnAddsql.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,6 +95,7 @@ public class DAOActivity extends AppCompatActivity {
             }
         });
         mButton = (Button) findViewById(R.id.button);
+        //点击按钮完成并销毁
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

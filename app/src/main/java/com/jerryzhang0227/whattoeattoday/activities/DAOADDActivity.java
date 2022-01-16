@@ -40,11 +40,14 @@ public class DAOADDActivity extends AppCompatActivity {
         mBtnAddsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //获取输入框的值
                 String foodname = mEtFoodname.getText().toString().trim();
                 String foodweight = mEtWeight.getText().toString().trim();
+                //判断是否为空
                 if (foodweight.isEmpty()|foodname.isEmpty()) {
                     Toast.makeText(DAOADDActivity.this,"请检查输入",Toast.LENGTH_SHORT).show();
                 }else {
+                    //打开数据库并插入数据
                     DatabaseHelper dbsqLiteOpenHelper = new DatabaseHelper(DAOADDActivity.this, "food.db", null, 1);
                     SQLiteDatabase db = dbsqLiteOpenHelper.getWritableDatabase();
                     ContentValues values = new ContentValues();

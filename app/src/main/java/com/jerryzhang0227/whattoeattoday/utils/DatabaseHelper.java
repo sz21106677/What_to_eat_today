@@ -13,9 +13,13 @@ import com.jerryzhang0227.whattoeattoday.activities.DAOADDActivity;
 import com.jerryzhang0227.whattoeattoday.activities.DAOActivity;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
+
+    //完成构造
     public DatabaseHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
+
+    //创建数据库
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String sql="create table foodlist(id integer primary key autoincrement,name varchar(100),weight integer)";
@@ -25,11 +29,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
-    }
-
-    public SQLiteDatabase sqlBase(Context context) {
-        DatabaseHelper dbsqLiteOpenHelper = new DatabaseHelper(context,"food.db", null, 1);
-        SQLiteDatabase db = dbsqLiteOpenHelper.getWritableDatabase();
-        return db;
     }
 }

@@ -21,7 +21,7 @@ public class FoodAdapter extends BaseAdapter {
         this.mData = mData;
         this.mContext = mContext;
     }
-
+    //返回列表大小
     @Override
     public int getCount() {
         return mData.size();
@@ -37,6 +37,7 @@ public class FoodAdapter extends BaseAdapter {
         return i;
     }
 
+    //根据View的id针对渲染
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = LayoutInflater.from(mContext).inflate(R.layout.listview_food,viewGroup,false);
