@@ -59,7 +59,7 @@ public class DAOActivity extends AppCompatActivity {
 
         @Override
         protected LinkedList doInBackground(LinkedList... linkedLists) {
-            try {
+//            try {
                 mData = new LinkedList<Food>();
                 DatabaseHelper dbsqLiteOpenHelper = new DatabaseHelper(mContext, "food.db", null, 1);
                 SQLiteDatabase db = dbsqLiteOpenHelper.getWritableDatabase();
@@ -72,10 +72,10 @@ public class DAOActivity extends AppCompatActivity {
                     mData.add(new Food(foodname, weight));
                 }
                 //模拟一次耗时任务
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+                //Thread.sleep(2000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
             return (LinkedList) mData;
         }
 
