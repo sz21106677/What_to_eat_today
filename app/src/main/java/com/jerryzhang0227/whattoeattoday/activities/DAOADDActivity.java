@@ -48,13 +48,18 @@ public class DAOADDActivity extends AppCompatActivity {
                     Toast.makeText(DAOADDActivity.this,"请检查输入",Toast.LENGTH_SHORT).show();
                 }else {
                     //打开数据库并插入数据
-                    DatabaseHelper dbsqLiteOpenHelper = new DatabaseHelper(DAOADDActivity.this, "food.db", null, 1);
-                    SQLiteDatabase db = dbsqLiteOpenHelper.getWritableDatabase();
-                    ContentValues values = new ContentValues();
-                    values.put("name",foodname);
-                    values.put("weight",foodweight);
-                    db.insert("foodlist", null, values);
-                    finish();
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            DatabaseHelper dbsqLiteOpenHelper = new DatabaseHelper(DAOADDActivity.this, "food.db", null, 1);
+                            SQLiteDatabase db = dbsqLiteOpenHelper.getWritableDatabase();
+                            ContentValues values = new ContentValues();
+                            values.put("name",foodname);
+                            values.put("weight",foodweight);
+                            db.insert("foodlist", null, values);
+                            finish();
+                        }
+                    }).start();
                 }
             }
         });
