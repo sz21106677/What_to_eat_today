@@ -71,6 +71,7 @@ public class DAOActivity extends AppCompatActivity {
                     @SuppressLint("Range") int weight = cursor.getInt(cursor.getColumnIndex("weight"));
                     mData.add(new Food(foodname, weight));
                 }
+                cursor.close();
                 //模拟一次耗时任务
                 //Thread.sleep(2000);
 //            } catch (InterruptedException e) {
