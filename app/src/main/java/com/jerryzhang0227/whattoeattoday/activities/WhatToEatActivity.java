@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,8 +24,11 @@ import com.jerryzhang0227.whattoeattoday.utils.DatabaseHelper;
 public class WhatToEatActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button mButton;
+    private ImageButton mButton2;
     private TextView mTextView;
     private static boolean isClicked = false;
+    private static final Handler handler = new Handler();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +77,8 @@ public class WhatToEatActivity extends AppCompatActivity implements View.OnClick
         mTextView = (TextView) findViewById(R.id.mst_txtv);
         mTextView.setText(Pignese());
         mButton.setOnClickListener(this);
+        mButton2 = (ImageButton) findViewById(R.id.btn_back);
+        mButton2.setOnClickListener(view -> finish());
     }
 
     @Override
@@ -97,8 +103,8 @@ public class WhatToEatActivity extends AppCompatActivity implements View.OnClick
     private void eat() {
         Toast.makeText(this,"正在数据库中抽取ing...",Toast.LENGTH_SHORT).show();
         mButton.setText("...");
+        mButton.setClickable(false);
         mTextView.setText("我想想");
-        Handler handler = new Handler();
         //获取抽取结果并显示出来
         new Thread(() -> {
             String Str = eatWhat();
@@ -112,8 +118,15 @@ public class WhatToEatActivity extends AppCompatActivity implements View.OnClick
                 mTextView.setText(Str);
                 mButton.setText("行");
                 isClicked = true;
+                mButton.setClickable(true);
                 Toast.makeText(WhatToEatActivity.this,"抽取完成！",Toast.LENGTH_SHORT).show();
             });
         }).start();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Toast.makeText(this,"886",Toast.LENGTH_SHORT).show();
     }
 }
