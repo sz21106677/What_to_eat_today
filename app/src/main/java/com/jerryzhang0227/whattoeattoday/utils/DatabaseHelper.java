@@ -1,16 +1,11 @@
 package com.jerryzhang0227.whattoeattoday.utils;
 
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
-
-import com.jerryzhang0227.whattoeattoday.MyApplication;
-import com.jerryzhang0227.whattoeattoday.activities.DAOADDActivity;
-import com.jerryzhang0227.whattoeattoday.activities.DAOActivity;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 

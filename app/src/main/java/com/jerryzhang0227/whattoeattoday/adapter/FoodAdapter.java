@@ -1,18 +1,19 @@
 package com.jerryzhang0227.whattoeattoday.adapter;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.jerryzhang0227.whattoeattoday.R;
 import com.jerryzhang0227.whattoeattoday.model.Food;
 
 import java.util.LinkedList;
 
-public class FoodAdapter extends BaseAdapter {
+public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.myViewHolder> {
 
     private LinkedList<Food> mData;
     private Context mContext;
@@ -21,30 +22,56 @@ public class FoodAdapter extends BaseAdapter {
         this.mData = mData;
         this.mContext = mContext;
     }
-    //返回列表大小
+
+    @NonNull
     @Override
-    public int getCount() {
+    public myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //填充相应的view
+        View view = View.inflate(mContext, R.layout.recycleview_food,null);
+        return new myViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
+        //绑定值
+        holder.foodname.setText(mData.get(position).getFoodName());
+        holder.weight.setText(mData.get(position).getWeight()+"");
+    }
+
+    @Override
+    public int getItemCount() {
+        //得到item大小
         return mData.size();
     }
 
-    @Override
-    public Object getItem(int i) {
-        return null;
+    public class myViewHolder extends RecyclerView.ViewHolder {
+        private TextView foodname;
+        private TextView weight;
+        
+        public myViewHolder(@NonNull View itemView) {
+            super(itemView);
+            foodname = itemView.findViewById(R.id.tv_foodname);
+            weight = itemView.findViewById(R.id.tx_weight);
+
+            itemView.setOnLongClickListener(view -> {
+                if (mOnRecycleViewItemsOnClickListener != null) {
+                    mOnRecycleViewItemsOnClickListener.onRecycleViewItemsOnLongClick(getLayoutPosition());
+                }
+                return false;
+            });
+        }
     }
 
-    @Override
-    public long getItemId(int i) {
-        return i;
+    //定义监听器
+    private OnRecycleViewItemsOnClickListener mOnRecycleViewItemsOnClickListener;
+
+    //定义外部方法
+    public void setmOnRecycleViewItemsOnLongClickListener(OnRecycleViewItemsOnClickListener listener) {
+        mOnRecycleViewItemsOnClickListener = listener;
     }
 
-    //根据View的id针对渲染
-    @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        view = LayoutInflater.from(mContext).inflate(R.layout.listview_food,viewGroup,false);
-        TextView txt_mFood = view.findViewById(R.id.tv_foodname);
-        TextView txt_weight = view.findViewById(R.id.tx_weight);
-        txt_mFood.setText(mData.get(i).getFoodName());
-        txt_weight.setText(mData.get(i).getWeight()+"");
-        return view;
+    //新建接口用于监听
+    public interface OnRecycleViewItemsOnClickListener {
+        void onRecycleViewItemsOnLongClick(int position);
     }
 }

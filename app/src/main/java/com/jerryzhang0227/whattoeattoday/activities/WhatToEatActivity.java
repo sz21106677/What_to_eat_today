@@ -3,13 +3,11 @@ package com.jerryzhang0227.whattoeattoday.activities;
 import static com.jerryzhang0227.whattoeattoday.utils.WhatToEat.Pignese;
 import static com.jerryzhang0227.whattoeattoday.utils.WhatToEat.eatWhat;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,7 +19,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.jerryzhang0227.whattoeattoday.R;
 import com.jerryzhang0227.whattoeattoday.utils.DatabaseHelper;
-import com.jerryzhang0227.whattoeattoday.utils.ReadFile;
 
 public class WhatToEatActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -33,10 +30,16 @@ public class WhatToEatActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         //隐藏ActionBar
         ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.hide();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         databasecheck();
     }
 
@@ -47,6 +50,7 @@ public class WhatToEatActivity extends AppCompatActivity implements View.OnClick
         //查询数据库中数据总数
         Cursor cursor = db.rawQuery("select * from foodlist", null);
         int a = cursor.getCount();
+        cursor.close();
         if (a>0){
             initView();
         }else {
@@ -56,12 +60,9 @@ public class WhatToEatActivity extends AppCompatActivity implements View.OnClick
             AlertDialog alert = builder
                     .setTitle("系统提示：")
                     .setMessage("您还没有在数据库中添加数据，点击确定前往数据库编辑")
-                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            startActivity(new Intent(WhatToEatActivity.this, DAOActivity.class));
-                            finish();
-                        }
+                    .setPositiveButton("确定", (dialog, which) -> {
+                        startActivity(new Intent(WhatToEatActivity.this, DAOActivity.class));
+                        finish();
                     }).create();
             alert.show();
         }
@@ -77,15 +78,12 @@ public class WhatToEatActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        switch (id) {
-            case R.id.mst_btn:
-                //判断按钮是否被按下，如没有则抽取结果，其他则重置
-                if (!isClicked) {
-                    eat();
-                } else {
-                    reset();
-                }
-                break;
+        if (id == R.id.mst_btn) {//判断按钮是否被按下，如没有则抽取结果，其他则重置
+            if (!isClicked) {
+                eat();
+            } else {
+                reset();
+            }
         }
     }
 
@@ -97,10 +95,25 @@ public class WhatToEatActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void eat() {
+        Toast.makeText(this,"正在数据库中抽取ing...",Toast.LENGTH_SHORT).show();
+        mButton.setText("...");
+        mTextView.setText("我想想");
+        Handler handler = new Handler();
         //获取抽取结果并显示出来
-        String Str = eatWhat();
-        mTextView.setText(Str);
-        mButton.setText("行");
-        isClicked = true;
+        new Thread(() -> {
+            String Str = eatWhat();
+            try {
+                //模拟耗时操作
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            handler.post(() -> {
+                mTextView.setText(Str);
+                mButton.setText("行");
+                isClicked = true;
+                Toast.makeText(WhatToEatActivity.this,"抽取完成！",Toast.LENGTH_SHORT).show();
+            });
+        }).start();
     }
 }

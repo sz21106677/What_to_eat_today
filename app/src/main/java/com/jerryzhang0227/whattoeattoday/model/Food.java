@@ -1,8 +1,8 @@
 package com.jerryzhang0227.whattoeattoday.model;
 
 public class Food {
-    private String foodName;
-    private int weight;
+    private final String foodName;
+    private final int weight;
 
     public Food(String foodName, int weight) {
         this.foodName = foodName;
@@ -13,15 +13,8 @@ public class Food {
         return foodName;
     }
 
-    public void setFoodName(String foodName) {
-        this.foodName = foodName;
-    }
-
     public int getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
 }

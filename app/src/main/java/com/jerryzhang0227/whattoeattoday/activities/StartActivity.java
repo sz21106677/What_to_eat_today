@@ -3,8 +3,6 @@ package com.jerryzhang0227.whattoeattoday.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 
 import androidx.appcompat.app.ActionBar;
@@ -12,26 +10,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.jerryzhang0227.whattoeattoday.R;
 
-import java.net.HttpURLConnection;
-
 public class StartActivity extends AppCompatActivity implements View.OnClickListener {
-
-    private Button mWhattoeatBtn;
-    private Button mMathBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.hide();
         setContentView(R.layout.activity_start);
         initView();
     }
 
     private void initView() {
-        mWhattoeatBtn = (Button) findViewById(R.id.whattoeat_btn);
+        Button mWhattoeatBtn = (Button) findViewById(R.id.whattoeat_btn);
         mWhattoeatBtn.setOnClickListener(this);
-        mMathBtn = (Button) findViewById(R.id.math_btn);
+        Button mMathBtn = (Button) findViewById(R.id.math_btn);
         mMathBtn.setOnClickListener(this);
     }
 
